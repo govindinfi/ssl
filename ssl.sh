@@ -127,7 +127,6 @@ subjectAltName          = @subject_alt_names
 DNS.1                   = *.google.com
 IP.1                    = $HOST_IP
 IP.2                    = 127.0.0.1
-IP.2                    = $PUBIP
 IP.3                    = ::1
 EOT
 
