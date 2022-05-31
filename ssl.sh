@@ -127,8 +127,6 @@ EOT
 #  sign the certificate
 openssl ca -config ca.config -batch -passin pass:${pass} -out $HOST_IP.crt -infiles $HOST_IP.csr &>/dev/null
 
-#openssl verify -CAfile ca.crt $HOST_IP.crt
-
 openssl verify -check_ss_sig -trusted_first -verify_ip ${HOST_IP} -CAfile ca.crt ${HOST_IP}.crt | awk '{print $2}'
 
 #  cleanup after SSLeay
