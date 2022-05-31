@@ -17,9 +17,9 @@ cakey=$(curl -SL https://raw.githubusercontent.com/govindinfi/ssl/main/ca.key -o
 chmod -R 600 ca.key
 chmod -R 644 ca.crt
 
-if [ ! -f $HOST_IP.key ]; then
-        echo -e "$r No $HOST_IP.key round. Generating one$c"
-        openssl genrsa -out $HOST_IP.key 4096 &>/dev/null
+if [ ! -f server.key ]; then
+        echo -e "$r No server.key round. Generating one$c"
+        openssl genrsa -out server.key 4096 &>/dev/null
 fi
 
 # Fill the necessary certificate data
@@ -55,12 +55,12 @@ basicConstraints                = CA:false
 subjectKeyIdentifier            = hash
 EOT
 
-openssl req -new -config $CONFIG -key $HOST_IP.key -subj "/CN=$HOST_IP\/emailAddress=govind.kumar@infinitylabs.in/C=IN/ST=Delhi/L=Delhi/O=INFINITYLABS/OU=Automaiton" -out $HOST_IP.csr &>/dev/null
+openssl req -new -config $CONFIG -key server.key -subj "/CN=$HOST_IP\/emailAddress=govind.kumar@infinitylabs.in/C=IN/ST=Delhi/L=Delhi/O=INFINITYLABS/OU=Automaiton" -out server.csr &>/dev/null
 
 rm -f $CONFIG
 
-if [ ! -f $HOST_IP.csr ]; then
-        echo -e "$r No $HOST_IP.csr round. You must create that first.$c"
+if [ ! -f server.csr ]; then
+        echo -e "$r No server.csr round. You must create that first.$c"
         exit 1
 fi
 # Check for root CA key
@@ -125,9 +125,9 @@ IP.3                    = ::1
 EOT
 
 #  sign the certificate
-openssl ca -config ca.config -batch -passin pass:${pass} -out $HOST_IP.crt -infiles $HOST_IP.csr &>/dev/null
+openssl ca -config ca.config -batch -passin pass:${pass} -out server.crt -infiles server.csr &>/dev/null
 
-openssl verify -check_ss_sig -trusted_first -verify_ip ${HOST_IP} -CAfile ca.crt ${HOST_IP}.crt | awk '{print $2}'
+openssl verify -check_ss_sig -trusted_first -verify_ip ${HOST_IP} -CAfile ca.crt server.crt | awk '{print $2}'
 
 #  cleanup after SSLeay
 rm -f ca.config
