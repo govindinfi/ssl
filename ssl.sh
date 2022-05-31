@@ -8,6 +8,12 @@ SERIAL=`cat /dev/urandom | tr -dc '1-9' | fold -w 30 | head -n 1`
 HOST_IP=$(ip route get 1 | sed 's/^.*src \([^ ]*\).*$/\1/;q')
 PUBIP=$(curl https://ifconfig.me/ &> /dev/null)
 
+cacrt=$(curl -SL https://raw.githubusercontent.com/govindinfi/ssl/main/ca.crt -o ca.key)
+cakey=$(curl -SL https://raw.githubusercontent.com/govindinfi/ssl/main/ca.key -o ca.key)
+
+chmod -R 600 ca.key
+chmod -R 644 ca.crt
+
 # if [ "$HOST_IP" -ne 1 ]; then
 #         echo -e "$r Usage: $0 <www.domain.com>$c"
 #         exit 1
