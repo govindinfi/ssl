@@ -19,7 +19,7 @@ chmod -R 644 ca.crt
 
 if [ ! -f $HOST_IP.key ]; then
         echo -e "$r No $HOST_IP.key round. Generating one$c"
-        openssl genrsa -out $HOST_IP.key 4096
+        openssl genrsa -out $HOST_IP.key 4096 &>/dev/null
 fi
 
 # Fill the necessary certificate data
