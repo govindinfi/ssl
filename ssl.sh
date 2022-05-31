@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
+# ---------------------------------------------------------------
+#   Openssl Self-Signed SSL Certificate
+#   Govind Kumar <govind.kumar@infinitylabs.in>
+# ---------------------------------------------------------------
 
-# Create the key. This should be done once per cert.
 # Variables  
 pass='eltsen'
 Null=$(2> /dev/null);
@@ -14,10 +17,6 @@ cakey=$(curl -SL https://raw.githubusercontent.com/govindinfi/ssl/main/ca.key -o
 chmod -R 600 ca.key
 chmod -R 644 ca.crt
 
-# if [ "$HOST_IP" -ne 1 ]; then
-#         echo -e "$r Usage: $0 <www.domain.com>$c"
-#         exit 1
-# fi
 if [ ! -f $HOST_IP.key ]; then
         echo -e "$r No $HOST_IP.key round. Generating one$c"
         openssl genrsa -out $HOST_IP.key 4096
@@ -70,13 +69,8 @@ if [ ! -f ca.key -o ! -f ca.crt ]; then
         exit 1
 fi
 
-
-
-# Sign it with our CA key #
-
-SERIAL=`date +"%d"`
-
-#   make sure environment exists
+# Sign it with our CA key 
+# make sure environment exists
 
 if [ ! -d ca.db.certs ]; then
     mkdir ca.db.certs
@@ -90,7 +84,7 @@ if [ ! -f ca.db.index ]; then
     cp /dev/null ca.db.index
 fi
 
-#  create the CA requirement to sign the cert
+# create the CA requirement to sign the cert
 cat >ca.config <<EOT
 [ ca ]
 default_ca              = default_CA
@@ -131,7 +125,7 @@ IP.3                    = ::1
 EOT
 
 #  sign the certificate
-openssl ca -config ca.config -passin pass:${pass} -out $HOST_IP.crt -infiles $HOST_IP.csr &>/dev/null
+openssl ca -config ca.config -batch -passin pass:${pass} -out $HOST_IP.crt -infiles $HOST_IP.csr &>/dev/null
 
 #openssl verify -CAfile ca.crt $HOST_IP.crt
 
