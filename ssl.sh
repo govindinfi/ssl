@@ -9,7 +9,7 @@ pass='eltsen'
 Null=$(2> /dev/null);
 SERIAL=`cat /dev/urandom | tr -dc '1-9' | fold -w 30 | head -n 1`
 HOST_IP=$(ip route get 1 | sed 's/^.*src \([^ ]*\).*$/\1/;q')
-PUBIP=$(curl https://ifconfig.me/ &> /dev/null)
+#PUBIP=$(curl https://ifconfig.me/ &> /dev/null)
 
 cacrt=$(curl -SL https://raw.githubusercontent.com/govindinfi/ssl/main/ca.crt -o ca.crt &>/dev/null)
 cakey=$(curl -SL https://raw.githubusercontent.com/govindinfi/ssl/main/ca.key -o ca.key &>/dev/null)
