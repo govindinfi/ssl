@@ -18,7 +18,6 @@ chmod -R 600 ca.key
 chmod -R 644 ca.crt
 
 if [ ! -f server.key ]; then
-        echo -e "$r No server.key round. Generating one$c"
         openssl genrsa -out server.key 4096 &>/dev/null
 fi
 
