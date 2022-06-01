@@ -55,7 +55,7 @@ basicConstraints                = CA:false
 subjectKeyIdentifier            = hash
 EOT
 
-openssl req -new -config $CONFIG -key server.key -subj "/CN=$HOST_IP\/emailAddress=govind.kumar@infinitylabs.in/C=IN/ST=Delhi/L=Delhi/O=INFINITYLABS/OU=Automaiton" -out server.csr &>/dev/null
+openssl req -new -config $CONFIG -key server.key -subj "/CN=$HOST_IP/emailAddress=govind.kumar@infinitylabs.in/C=IN/ST=Delhi/L=Delhi/O=INFINITYLABS/OU=Automaiton" -out server.csr &>/dev/null
 
 rm -f $CONFIG
 
