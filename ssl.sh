@@ -121,7 +121,7 @@ DNS.1                   = *.google.com
 IP.1                    = $HOST_IP
 IP.2                    = 127.0.0.1
 IP.3                    = ::1
-IP.4                    = localhost
+IP.4                    = "localhost"
 EOT
 
 #  sign the certificate
