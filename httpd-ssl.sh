@@ -1,8 +1,8 @@
 #!/usr/bin/bash
-# ---------------------------------------------------------------
-#   Openssl Self-Signed SSL Certificate
-#   Govind Kumar <govind.kumar@infinitylabs.in>
-# ---------------------------------------------------------------
+#----------------------------------------------------------------
+#   Openssl Self-Signed SSL Certificate                         |
+#   Govind Kumar <govind.kumar@infinitylabs.in>                 |
+#----------------------------------------------------------------
 
 # Variables  
 Null=$(2> /dev/null);
