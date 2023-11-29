@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 # ---------------------------------------------------------------
-#   Openssl Self-Signed SSL Certificate
+#   Openssl Self-Signed SSL Certificate for projects
 #   Govind Kumar <govind.kumar@infinitylabs.in>
 # ---------------------------------------------------------------
 
